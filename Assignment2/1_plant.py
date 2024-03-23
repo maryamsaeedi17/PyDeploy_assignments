@@ -37,7 +37,7 @@ response = requests.get(response_json['image']['url'], stream = True)
 if response.status_code == 200:
     with open('assets/image.jpg','wb') as f:
         shutil.copyfileobj(response.raw, f)
-    print('Image sucessfully Downloaded: ','assets/image.jpg')
+    print('Image sucessfully downloaded and saved in the assets folder.')
 
 
 
