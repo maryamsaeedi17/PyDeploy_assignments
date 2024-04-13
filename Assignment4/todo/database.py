@@ -2,7 +2,7 @@ import sqlite3
 
 class Database:
     def __init__(self):
-        self.con=sqlite3.connect("todo.db")
+        self.con=sqlite3.connect("todo/todo.db")
         self.cursor=self.con.cursor()
 
         
@@ -21,6 +21,11 @@ class Database:
             return True
         except:
             return False
+        
+    def update_task(self, id, field, new_value):
+        query = f"UPDATE TASKS SET {field} = '{new_value}' WHERE id = {id}"
+        self.cursor.execute(query)
+        self.con.commit()
         
     def remove_tasks(self, id):
         query=f"DELETE FROM tasks WHERE id={id}"
