@@ -4,6 +4,8 @@ import cv2
 import numpy as np
 import io
 
+app = FastAPI()
+
 @app.post("/rgb2gray")
 async def rgb2gray(input_file: UploadFile = File(None)):
     if not input_file.content_type.startswith("image/"):
