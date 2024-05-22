@@ -8,7 +8,7 @@ def db_contents(cursor):
     con = sqlite3.connect("todo.db")
     cursor = con.cursor()
     db_content= []
-    query = "SELECT id,title , description , time , status from TASKS"
+    query = "SELECT id, title , description , time , status from TASKS"
     tasks = cursor.execute(query)
     for task in tasks:
         db_content.append({"id" : f"{task[0]}" , "title": f"{task[1]}" , "description": f"{task[2]}", "time": f"{task[3]}", "status": f"{task[4]}"})
