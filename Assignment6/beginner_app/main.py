@@ -33,7 +33,7 @@ def get_db():
     db.close()
 
 @app.get("/users")
-def read_user(user_id: int):
+def read_user(user_id: int, db: Session = Depends(get_db)):
     db = SessionLocal()
     user = db.query(User).filter(User.id==user_id).first()
     db.close()
@@ -42,7 +42,7 @@ def read_user(user_id: int):
     return user
 
 @app.post("/users")
-def create_user(user_name: str, user_email: str):
+def create_user(user_name: str, user_email: str, db: Session = Depends(get_db)):
     db = SessionLocal()
     user = User(name=user_name, email=user_email)
     db.add(user)
@@ -51,3 +51,14 @@ def create_user(user_name: str, user_email: str):
     db.close()
     return user
 
+
+@app.delete("/users/{user_id}")
+def remove(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found!!")
+    db.delete(user)
+    db.commit()
+    return {"message": "User deleted successfully."}
+
+    
