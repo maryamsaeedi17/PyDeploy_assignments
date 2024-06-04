@@ -1,8 +1,7 @@
 name: CD-Liara
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -17,4 +16,4 @@ jobs:
           LIARA_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
         run: |
           npm i -g @liara/cli@5
-          liara deploy --app="maryam-test" --api-token="$LIARA_TOKEN" --no-app-logs
+          liara deploy --app="maryam-test" --api-token="$LIARA_TOKEN" --detach
