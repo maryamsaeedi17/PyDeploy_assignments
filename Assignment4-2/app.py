@@ -1,6 +1,7 @@
 import os
 import cv2
 from flask import Flask, render_template, request, redirect, url_for, session
+# from deepface import DeepFace
 
 
 app = Flask("Analyze Face")
@@ -34,7 +35,6 @@ def login():
         if result:
             return redirect(url_for("upload"))
         else:
-            # login
             return redirect(url_for("login"))
 
 
@@ -52,9 +52,14 @@ def upload():
             if my_image and allowed_file(my_image.filename):
                 save_path = os.path.join(app.config["UPLOAD_FOLDER"], my_image.filename)
                 my_image.save(save_path)
-            return redirect(url_for("result"))
+                # result = DeepFace.analyze(
+                #     img_path = "save_path",
+                #     actions = ['age']
+                # )
+                # age = result[0]["age"]
+            # return render_template("result.html", age=age)
 
 
-@app.route("/result")
-def result():
-    return render_template("result.html")
+# @app.route("/result")
+# def result():
+#     return render_template("result.html")
