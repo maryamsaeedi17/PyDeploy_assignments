@@ -1,7 +1,9 @@
 import os
+import numpy as np
 import cv2
 from flask import Flask, render_template, request, redirect, url_for, session
 # from deepface import DeepFace
+# import tensorflow as tf
 
 
 app = Flask("Analyze Face")
@@ -52,14 +54,37 @@ def upload():
             if my_image and allowed_file(my_image.filename):
                 save_path = os.path.join(app.config["UPLOAD_FOLDER"], my_image.filename)
                 my_image.save(save_path)
+                
+                color_img = cv2.imread(save_path)
+                gray_img = cv2.cvtColor(color_img, cv2.COLOR_RGB2GRAY)
+                cv2.imwrite("static/images/gray_image.jpg", gray_img)
                 # result = DeepFace.analyze(
                 #     img_path = "save_path",
                 #     actions = ['age']
                 # )
                 # age = result[0]["age"]
-            # return render_template("result.html", age=age)
+            return redirect(url_for("result"))
 
 
-# @app.route("/result")
-# def result():
-#     return render_template("result.html")
+@app.route("/result")
+def result():
+    return render_template("result.html")
+
+
+@app.route("/bmr", methods=['GET', 'POST'])
+def calculate_BMR():
+    if request.method == "GET":
+        return render_template("bmr.html")
+    
+    elif request.method == "POST":
+        weight = int(request.form["weight"])
+        height = int(request.form["height"])
+        age = int(request.form["age"])
+        gender = request.form["gender"]
+        
+        if gender == "female":
+            bmr = (10*weight)+(6.25*height)-(5*age)-161
+        elif gender == "male":
+            bmr = (10*weight)+(6.25*height)-(5*age)+5
+
+        return render_template("calculate.html", BMR=bmr)
