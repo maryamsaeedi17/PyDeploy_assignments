@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate BMR</title>
+    <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <a href="/bmr"> Back</a> <br><br>
+
+    <style>
+        .custom-card {
+            background-color: hsl(113, 100%, 64%); /* Change the background color to orange-red */
+            color: white; /* Change the text color to white */
+            border-radius: 20px; /* Add rounded corners to the card */
+            box-shadow: 0 4px 6px rgba(14, 0, 0, 0.1); /* Add a subtle shadow effect */
+        }
+    </style>
+    
+    <div class="card custom-card mb-3" style="max-width: 18rem;">
+        <div class="card-header">Your BMR:</div>
+        <div class="card-body">
+            <h5 class="card-title">{{ BMR }}</h5>
+        </div>
+    </div>
+    
+
+    <!-- <div class="card text-bg-success mb-3 " style="max-width: 18rem;">
+        <div class="card-header text-black">Your BMR:</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ BMR }}</h5>
+        </div>
+    </div> -->
+
+    <script src="static/js.bootstrap.js"></script>
+</body>
+</html>

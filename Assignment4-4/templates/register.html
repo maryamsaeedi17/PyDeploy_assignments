@@ -7,6 +7,23 @@
 {% block content %}
     <div class="row justify-content-center">
     <div class="col-4">
+
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <p style="color: red;">
+                {{ message }}
+              </p>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+
+
+
+
+
         <div class="card text-bg-info mb-3">
             <div class="card-header">Header</div>
             <div class="card-body">
@@ -23,7 +40,7 @@
                       <label for="exampleInputPassword1" class="form-label">Password</label>
                       <input name="password" type="password" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
             </div>
           </div>
