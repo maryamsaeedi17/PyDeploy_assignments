@@ -4,10 +4,8 @@ import numpy as np
 import cv2
 from flask import Flask, flash, render_template, request, redirect, url_for, session as flask_session
 # from deepface import DeepFace
-# import tensorflow as tf
 from sqlmodel  import Field, SQLModel, create_engine, Session, select
 from pydantic import BaseModel
-
 
 app = Flask("Analyze Face")
 app.secret_key = "my_secret_key"
@@ -33,7 +31,6 @@ class LoginModel(BaseModel):
     username: str
     password: str
 
-
 def auth(email, password):
     if email == "maryam@maryam.saeedi" and password == "2468":
         return True
@@ -43,11 +40,9 @@ def auth(email, password):
 def allowed_file(filename):
     return True
     
-
 @app.route("/")
 def index():
     return render_template("index.html")
-
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -60,7 +55,7 @@ def login():
                 password = request.form["password"]
             )
         except:
-            flash("Type error")
+            flash("Type error", "warning")
             return redirect(url_for("login"))
         
         with Session(engine) as db_session:
@@ -68,7 +63,6 @@ def login():
             user = db_session.exec(statement).first()   
 
         if user:
-
             password_byte = login_model.password.encode("utf-8")
             if bcrypt.checkpw( password_byte, user.password):
 
@@ -81,8 +75,7 @@ def login():
                 return redirect(url_for("login"))
         else:
             flash("Username is incorrect")
-            return redirect(url_for("login"))
-        
+            return redirect(url_for("login"))       
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -118,7 +111,12 @@ def register():
         else:
             flash("Username already exist, try another username")
             return redirect(url_for("register"))
-
+        
+@app.route("/logout")
+def logout():
+    flask_session.pop("user_id")
+    return redirect(url_for("index"))
+    
 
 @app.route("/upload", methods=['GET', 'POST'])
 def upload():

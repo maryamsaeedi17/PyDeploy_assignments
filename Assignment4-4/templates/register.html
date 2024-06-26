@@ -9,7 +9,7 @@
     <div class="col-4">
 
 
-        {% with messages = get_flashed_messages() %}
+        {% with messages = get_flashed_messages(with_categories=True) %}
           {% if messages %}
             {% for message in messages %}
               <p style="color: red;">
