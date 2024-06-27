@@ -1,6 +1,6 @@
 import os
 import bcrypt
-import numpy as np
+# import numpy as np
 import cv2
 from flask import Flask, flash, render_template, request, redirect, url_for, session as flask_session
 # from deepface import DeepFace
@@ -66,15 +66,15 @@ def login():
             password_byte = login_model.password.encode("utf-8")
             if bcrypt.checkpw( password_byte, user.password):
 
-                flash("Welcome, you are logged in")
+                flash("Welcome, you are logged in", "success")
                 flask_session["user_id"] = user.id
 
                 return redirect(url_for("upload"))
             else:
-                flash("Password is incorrect")
+                flash("Password is incorrect", "danger")
                 return redirect(url_for("login"))
         else:
-            flash("Username is incorrect")
+            flash("Username is incorrect", "danger")
             return redirect(url_for("login"))       
 
 @app.route("/register", methods=['GET', 'POST'])

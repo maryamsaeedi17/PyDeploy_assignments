@@ -1,3 +1,4 @@
 flask
 bcrypt
 sqlmodel
+opencv-python
