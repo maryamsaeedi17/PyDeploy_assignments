@@ -1,7 +1,7 @@
 # PyDeploy_assignments
 The 14th assignment related to the PyDeploy course.
 
-## Flask Autentication
+## Flask - Auth - Messaging - Docker
 
 ## How to install :
 ```

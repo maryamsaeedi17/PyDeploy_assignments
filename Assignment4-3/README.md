@@ -1,7 +1,7 @@
 # PyDeploy_assignments
 The 13th assignment related to the PyDeploy course.
 
-## Flask Autentication
+## Flask Authentication - Database
 
 ## How to install :
 ```
