@@ -4,3 +4,22 @@
         ذهن خوانی
 {% endblock %}
 
+{% block content %}
+
+<div class="row justify-content-center mt-4">
+    <div class="col-5">
+        <div class="card text-bg-light mb-3">
+            <div class="card-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-lable">Enter the number that is in your mind right now!</label>
+                        <input type="number" name="number" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

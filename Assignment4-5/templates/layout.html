@@ -9,7 +9,8 @@
     {% endblock %}
   </title>
 
-  <link href="static/css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="{{url_for('static', filename='/css/bootstrap.css')}}" rel="stylesheet" type="text/css"> 
+  <!-- رفع خطای css -->
 </head>
 
 <body>
@@ -52,7 +53,7 @@
           </ul>
           <form class="d-flex" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
         </div>
       </div>
@@ -64,7 +65,8 @@
   </div>
 
 
-  <script src="static/js/bootstrap.js"></script>
+  <!-- <script src="static/js/bootstrap.js"></script> -->
+  <script src="{{url_for('static', filename='/js/bootstrap.js')}}"></script>
 
 </body>
 

@@ -159,6 +159,11 @@ def read_your_mind():
         x = request.form["number"]
 
 
-        return
+        return redirect(url_for("read_your_mind_result", number=x))
     
-    return render_template["read-your-mind.html"]
+    return render_template("read-your-mind.html")
+
+@app.route("/read-your-mind/result")
+def read_your_mind_result():
+    y = request.args.get("number")
+    return render_template("read-your-mind-result.html", number=y)
