@@ -5,14 +5,22 @@
 {% endblock %}
 
 {% block content %}
+<style>
+    #my-number{
+        display: none;
+    }
+</style>
 <div class="row justify-content-center mt-4">
     <div class="col-5">
         <div class="card text-bg-light mb-3">
             <div class="card-body">
+                <h3> I am reading your mind! </h3>
+                <button class="btn btn-info mb-3" onclick="start_progress"> OK </button>
+
                 <div id="my-pogress-bar" class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                     <div id="my-pogress-bar-child" class="progress-bar" style="width: 0%"></div>
                 </div>
-                <h1>
+                <h1 id="my-number">
                     {{ number }}
                 </h1>
             </div>
@@ -26,18 +34,19 @@
     }
 
     function start_progress(){
-        var my_progress_bar = document.getElementById("my-progress-bar");
-        var my_progress_bar_child = document.getElementById("my-progress-bar-child");
+        // var my_progress_bar = document.getElementById("my-progress-bar");
+        // var my_progress_bar_child = document.getElementById("my-progress-bar-child");
+        // var my_number = document.getElementById("my-number");
 
-        for(var i=0; i<100; i++){
-            my_progress_bar.setAttribute("aria-valuenow", i);
-            my_progress_bar_child.setAttribute("style", "width: " + i + "%");
-            console.log(i);
-            sleep(100);
-        }
+        // for(var i=0; i<100; i++){
+        //     my_progress_bar.setAttribute("aria-valuenow", i);
+        //     my_progress_bar_child.setAttribute("style", "width: " + i + "%");
+        //     console.log(i);
+        //     sleep(100);
+        // }
+        my_number.setAttribute("style", "display: block")
     }
 
-    start_progress()
 </script>
 
 {% endblock %}
