@@ -1,27 +1,19 @@
 import os
 import bcrypt
-# import numpy as np
 import cv2
 from flask import Flask, flash, render_template, request, redirect, url_for, session as flask_session
 # from deepface import DeepFace
-from sqlmodel  import Field, SQLModel, create_engine, Session, select
 from pydantic import BaseModel
+from sqlmodel import Session, select
+from database import get_user_by_username, create_user, User, engine
 
 app = Flask("Analyze Face")
 app.secret_key = "my_secret_key"
 app.config["UPLOAD_FOLDER"] = './uploads'
 app.config["ALLOWED_EXTENSIONS"] = {'png', 'jpg', 'jpeg'}
 
-class User(SQLModel, table=True):
-    id: int = Field(default=None, primary_key=True)
-    city: str = Field()
-    username:  str = Field()
-    password: str = Field()
 
-engine = create_engine('sqlite:///./database.db', echo=True)
-SQLModel.metadata.create_all(engine)
-
-# PyDantic models for request validation
+# PyDantic models for request validatio
 class RegisterModel(BaseModel):
     city: str
     username: str
@@ -58,9 +50,7 @@ def login():
             flash("Type error", "warning")
             return redirect(url_for("login"))
         
-        with Session(engine) as db_session:
-            statement = select(User).where(User.username == login_model.username)
-            user = db_session.exec(statement).first()   
+        user = get_user_by_username(login_model.username)  
 
         if user:
             password_byte = login_model.password.encode("utf-8")
